@@ -13,6 +13,7 @@ if (!PROV_CODES.includes(searchProvince)) {
 }
 
 const OUTPUT_FILE = `./charities_${searchProvince.toLowerCase()}.json`;
+console.log(`Results will be saved in ${OUTPUT_FILE}`);
 
 /*--------------------------------------------------------------------------*/
 // HTML entity encoder/decoder https://github.com/mathiasbynens/he
@@ -312,7 +313,6 @@ var escape = function(string) {
 /*--------------------------------------------------------------------------*/
 
 const charitieInfoList = [];
-await $`touch ${OUTPUT_FILE} && rm ${OUTPUT_FILE} && touch ${OUTPUT_FILE}`
 
 let currentPage = 1;
 while (true) {
