@@ -8,15 +8,15 @@ Use one of AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT provincial and ter
 const SEARCH_PROVINCE = 'AB';
 ```
 
-##Install
+## Install
 ```bash
 npm i -g zx
 ```
 
-##Requirements
+## Requirements
 Node.js >= 14.8.0
 
-##Run
+## Run
 ```bash
 chmod +x ./fetch-cra-charities.mjs
 ./fetch-cra-charities.mjs
