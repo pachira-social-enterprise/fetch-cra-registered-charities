@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
 // Provincial and territorial code: AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT
-const SEARCH_PROVINCE = 'NU';
+const SEARCH_PROVINCE = 'AB';
 const OUTPUT_FILE = `./charities_${SEARCH_PROVINCE.toLowerCase()}.json`;
 
 /*--------------------------------------------------------------------------*/
@@ -338,16 +338,16 @@ while (true) {
       console.error(`Failed to fetch ${charityInfoUrl}`);
       break;
     }
-    const quickViewHtml = await quickViewResp.text();    
+    const quickViewHtml = (await quickViewResp.text()).replace(/\r|\n|\t/g, '');
     const rawProgs = [...quickViewHtml.matchAll(/id="ongoingprograms".*?\<\/p\>/g)];
     let ongoingProgs = '', newProgs = '';
     if (rawProgs.length > 0) {
       ongoingProgs = rawProgs[0][0].replace('id="ongoingprograms">Ongoing programs: <br aria-hidden="true" />', '');
-      ongoingProgs = ongoingProgs.replace('</p>', '').trim();
+      ongoingProgs = decode(ongoingProgs.replace('</p>', '').trim());
     }
     if (rawProgs.length > 1) {
       newProgs = rawProgs[1][0].replace('id="ongoingprograms">New programs:<br aria-hidden="true" />', '');
-      newProgs = newProgs.replace('</p>', '').trim();
+      newProgs = decode(newProgs.replace('</p>', '').trim());
       if (newProgs.toUpperCase() === 'NIL') newProgs = '';
     }
 
