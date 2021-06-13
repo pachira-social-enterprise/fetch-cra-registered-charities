@@ -22,7 +22,10 @@ chmod +x ./fetch-cra-charities.mjs
 ./fetch-cra-charities.mjs
 ```
 Or via the `zx` executable:
-
 ```bash
 zx ./fetch-cra-charities.mjs
+```
+Or execute it remotely:
+```bash
+zx https://raw.githubusercontent.com/pachira-social-enterprise/fetch-cra-registered-charities/main/fetch-cra-charities.mjs
 ```
