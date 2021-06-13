@@ -1,8 +1,18 @@
 #!/usr/bin/env zx
 
 // Provincial and territorial code: AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT
-const SEARCH_PROVINCE = 'AB';
-const OUTPUT_FILE = `./charities_${SEARCH_PROVINCE.toLowerCase()}.json`;
+const PROV_CODES = ['AB', 'BC', 'MB', 'NB', 'NL', 'NT', 'NS', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT'];
+let searchProvince = await question(
+  'Choose provincial and territorial code (AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT): ', {
+  choices: PROV_CODES
+});
+searchProvince = searchProvince.trim().toUpperCase();
+if (!PROV_CODES.includes(searchProvince)) {
+  console.log(`Invalid provincial and territorial code.`);
+  process.exit(1);
+}
+
+const OUTPUT_FILE = `./charities_${searchProvince.toLowerCase()}.json`;
 
 /*--------------------------------------------------------------------------*/
 // HTML entity encoder/decoder https://github.com/mathiasbynens/he
@@ -306,7 +316,7 @@ await $`touch ${OUTPUT_FILE} && rm ${OUTPUT_FILE} && touch ${OUTPUT_FILE}`
 
 let currentPage = 1;
 while (true) {
-  const url = `https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dtldAdvncdSrch?dsrdPg=${currentPage}&q.stts=0007&q.prvncSttCd=${SEARCH_PROVINCE}&q.ordrClmn=NAME&q.ordrRnk=ASC`;
+  const url = `https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dtldAdvncdSrch?dsrdPg=${currentPage}&q.stts=0007&q.prvncSttCd=${searchProvince}&q.ordrClmn=NAME&q.ordrRnk=ASC`;
   const searchResultResp = await fetch(url);
   if (!searchResultResp.ok) {
     console.error(`Failed to fetch ${url}`);
@@ -329,7 +339,6 @@ while (true) {
         .trim();
     console.log(chalk.blue(`Fetching ${parseInt(positions[1])+j} of ${positions[3]} charities:`,
       chalk.yellowBright.bold(`${charityName}`)));
-    
     const charityInfoUrl = 'https://apps.cra-arc.gc.ca' + rawTableRow
       .substring(rawTableRow.indexOf('a href="')+'a href="'.length, 
         rawTableRow.indexOf('" class="btn"'));
