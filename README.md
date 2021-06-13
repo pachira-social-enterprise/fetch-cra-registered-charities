@@ -1,12 +1,7 @@
 # Fetch CRA registered charities
-This script fetches CRA registered charities by province.
+This is a zx script (https://github.com/google/zx) that fetches CRA registered charities by province.
 
-This is a zx script (https://github.com/google/zx)
 
-Use one of AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT provincial and territorial code in line 4 of fetch-cra-charities.mjs file:
-```
-const SEARCH_PROVINCE = 'AB';
-```
 
 ## Install
 ```bash
@@ -29,3 +24,6 @@ Or execute it remotely:
 ```bash
 zx https://raw.githubusercontent.com/pachira-social-enterprise/fetch-cra-registered-charities/main/fetch-cra-charities.mjs
 ```
+When prompted 
+`Choose provincial and territorial code (AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT):`
+Type two-letter abbreviations for Canadian provinces and territories.
