@@ -1,6 +1,6 @@
 #!/usr/bin/env zx
 
-// Province: AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT
+// Provincial and territorial code: AB, BC, MB, NB, NL, NT, NS, NU, ON, PE, QC, SK, YT
 const SEARCH_PROVINCE = 'NU';
 const OUTPUT_FILE = `./charities_${SEARCH_PROVINCE.toLowerCase()}.json`;
 
